@@ -23,9 +23,9 @@ import java.util.List;
 class EmployeeController
     {
         @GetMapping("/{employeeId}")
-        public EmployeeDTO getEmployeeById(@PathVariable Long employeeId)
+        public EmployeeDTO getEmployeeById(@PathVariable(name = "employeeId") Long id)
         {
-            return new EmployeeDTO("Sujit" , employeeId , "Sujit@gmail.com", 23 , LocalDate.of(2024 , 1 , 2 ), true);
+            return new EmployeeDTO("Sujit" , id , "Sujit@gmail.com", 23 , LocalDate.of(2024 , 1 , 2 ), true);
         }
 
         @GetMapping
