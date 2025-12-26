@@ -34,6 +34,31 @@ class EmployeeController
         {
             return "hii , Age is " + age + " "+ sortBy ;
         }
+
+        @PostMapping
+        public String addEmployee()
+        {
+            return "Return from PostMapping ";
+        }
+
+        @PutMapping
+        public String updateEmployeeById()
+        {
+            return "Return from PutMapping ";
+        }
+
+        @DeleteMapping
+        public String deleteEmployeeById()
+        {
+            return "Return from DeleteMapping";
+        }
+
+        @PatchMapping
+        public String patchEmployeeById()
+        {
+            return "Return from PatchMapping";
+        }
+
     }
 
 
