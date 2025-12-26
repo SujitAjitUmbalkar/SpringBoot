@@ -29,7 +29,7 @@ class EmployeeController
         }
 
         @GetMapping
-        public String getAllEmployees(@RequestParam(required = false) Integer age,
+        public String getAllEmployees(@RequestParam(required = false, name = "InputAge") Integer age,
                                                             @RequestParam(required = false) String sortBy)
         {
             return "hii , Age is " + age + " "+ sortBy ;
