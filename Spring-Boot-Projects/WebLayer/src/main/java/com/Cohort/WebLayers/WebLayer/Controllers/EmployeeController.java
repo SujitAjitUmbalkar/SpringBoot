@@ -17,6 +17,8 @@ import java.time.LocalDate;
 //          }
 //      }
 
+// Concept Of  @PathVariable
+// use path variables when the parameter is and essential part of the url path that identifies a resoure
 @RestController
      class EmployeeController
     {

@@ -1,6 +1,5 @@
 package com.Cohort.WebLayers.WebLayer.dto;
 
-
 import java.time.LocalDate;
 
 public class EmployeeDTO
