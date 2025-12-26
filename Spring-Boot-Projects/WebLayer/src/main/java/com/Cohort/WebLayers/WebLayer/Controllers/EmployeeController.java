@@ -33,9 +33,10 @@ import java.util.List;
         }
 
         @GetMapping(path="/employees")
-        public String getAllEmployees(@RequestParam Integer age)
+        public String getAllEmployees(@RequestParam(required = false) Integer age,
+                                                            @RequestParam(required = false) String sortBy)
         {
-            return "hii , Age is " + age;
+            return "hii , Age is " + age + " "+ sortBy ;
         }
     }
 
