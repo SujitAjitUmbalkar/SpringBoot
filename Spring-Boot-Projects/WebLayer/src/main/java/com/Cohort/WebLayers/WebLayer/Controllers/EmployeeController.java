@@ -36,9 +36,10 @@ class EmployeeController
         }
 
         @PostMapping
-        public String addEmployee()
+        public EmployeeDTO addEmployee(@RequestBody EmployeeDTO InputEmployee)
         {
-            return "Return from PostMapping ";
+            InputEmployee.setId(100L);
+            return  InputEmployee;
         }
 
         @PutMapping
