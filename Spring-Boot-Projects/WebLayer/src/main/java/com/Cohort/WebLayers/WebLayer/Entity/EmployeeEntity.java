@@ -8,6 +8,8 @@ import java.time.LocalDate;
 @Table(name="Employee")                 // if this is not done , then name of the table will be saved as EmployeeEntity in database
 public class EmployeeEntity
 {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private String name;
     private Long id;
     private String email;
