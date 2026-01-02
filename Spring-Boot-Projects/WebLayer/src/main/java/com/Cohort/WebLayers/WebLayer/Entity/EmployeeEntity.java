@@ -1,7 +1,6 @@
 package com.Cohort.WebLayers.WebLayer.Entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
