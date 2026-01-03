@@ -1,7 +1,9 @@
 package com.Cohort.WebLayers.WebLayer.Controllers;
 
+import com.Cohort.WebLayers.WebLayer.Entity.EmployeeEntity;
 import com.Cohort.WebLayers.WebLayer.Repository.EmployeeRepository;
 import com.Cohort.WebLayers.WebLayer.dto.EmployeeDTO;
+import jakarta.persistence.Id;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -18,25 +20,26 @@ class EmployeeController
         {
                 this.employeeRepository = employeeRepository;
         }
+                    // now we can use methods from employeeEntity interface
 
         @GetMapping("/{employeeId}")
-        public EmployeeDTO getEmployeeById(@PathVariable(name = "employeeId") Long id)
+        public EmployeeEntity getEmployeeById(@PathVariable(name = "employeeId") Long id)
         {
-            return new EmployeeDTO("Sujit" , id , "Sujit@gmail.com", 23 , LocalDate.of(2024 , 1 , 2 ), true);
+//            return  EmployeeRepository.findById(id);          if it returns null , nullpointerexception can be occure
+               return  employeeRepository.findById(id).orElse(null);
         }
 
         @GetMapping
-        public String getAllEmployees(@RequestParam(required = false, name = "InputAge") Integer age,
+        public List<EmployeeEntity> getAllEmployees(@RequestParam(required = false, name = "InputAge") Integer age,
                                                             @RequestParam(required = false) String sortBy)
         {
-            return "hii , Age is " + age + " "+ sortBy ;
+            return employeeRepository.findAll();
         }
 
         @PostMapping
-        public EmployeeDTO addEmployee(@RequestBody EmployeeDTO InputEmployee)
+        public EmployeeEntity addEmployee(@RequestBody EmployeeEntity InputEmployee)
         {
-            InputEmployee.setId(100L);
-            return  InputEmployee;
+            return  employeeRepository.save(InputEmployee);
         }
 
         @PutMapping
