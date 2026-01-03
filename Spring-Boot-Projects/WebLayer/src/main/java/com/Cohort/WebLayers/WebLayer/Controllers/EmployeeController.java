@@ -1,5 +1,6 @@
 package com.Cohort.WebLayers.WebLayer.Controllers;
 
+import com.Cohort.WebLayers.WebLayer.Repository.EmployeeRepository;
 import com.Cohort.WebLayers.WebLayer.dto.EmployeeDTO;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,21 +8,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-//@RestController
-//public class EmployeeController
-//{
-//      @GetMapping(path = "/getMyMassage")
-//          public String getMyMassage()
-//          {
-//              return "Secret Masssage : Hello Secretly  ";
-//          }
-//      }
-
-
 @RestController
 @RequestMapping("/employees")
 class EmployeeController
     {
+        private final EmployeeRepository employeeRepository;
+
+        public EmployeeController(EmployeeRepository employeeRepository)
+        {
+                this.employeeRepository = employeeRepository;
+        }
+
         @GetMapping("/{employeeId}")
         public EmployeeDTO getEmployeeById(@PathVariable(name = "employeeId") Long id)
         {
