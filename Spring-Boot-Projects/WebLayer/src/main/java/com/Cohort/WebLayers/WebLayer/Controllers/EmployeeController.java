@@ -19,26 +19,25 @@ class EmployeeController
         public EmployeeController(EmployeeService employeeService) {
             this.employeeService = employeeService;
         }
-                    // now we can use methods from EmployeeService interface
-
+        //1
         @GetMapping("/{employeeId}")
         public EmployeeEntity getEmployeeById(@PathVariable(name = "employeeId") Long id)
         {
 //            return  EmployeeRepository.findById(id);          if it returns null , nullpointerexception can be occure
-               return  employeeRepository.findById(id).orElse(null);
+               return  employeeService.getEmployeeById(id);
         }
-
+        //2
         @GetMapping
         public List<EmployeeEntity> getAllEmployees(@RequestParam(required = false, name = "InputAge") Integer age,
                                                             @RequestParam(required = false) String sortBy)
         {
-            return employeeRepository.findAll();
+            return employeeService.getAllEmployees();
         }
-
+        //3
         @PostMapping
         public EmployeeEntity addEmployee(@RequestBody EmployeeEntity InputEmployee)
         {
-            return  employeeRepository.save(InputEmployee);
+            return  employeeService.addEmployee(InputEmployee);
         }
 
         @PutMapping
