@@ -2,6 +2,7 @@ package com.Cohort.WebLayers.WebLayer.Controllers;
 
 import com.Cohort.WebLayers.WebLayer.Entity.EmployeeEntity;
 import com.Cohort.WebLayers.WebLayer.Repository.EmployeeRepository;
+import com.Cohort.WebLayers.WebLayer.Service.EmployeeService;
 import com.Cohort.WebLayers.WebLayer.dto.EmployeeDTO;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,13 +14,12 @@ import java.util.List;
 @RequestMapping("/employees")
 class EmployeeController
     {
-        private final EmployeeRepository employeeRepository;
+        private final EmployeeService employeeService;
 
-        public EmployeeController(EmployeeRepository employeeRepository)
-        {
-                this.employeeRepository = employeeRepository;
+        public EmployeeController(EmployeeService employeeService) {
+            this.employeeService = employeeService;
         }
-                    // now we can use methods from employeeEntity interface
+                    // now we can use methods from EmployeeService interface
 
         @GetMapping("/{employeeId}")
         public EmployeeEntity getEmployeeById(@PathVariable(name = "employeeId") Long id)
