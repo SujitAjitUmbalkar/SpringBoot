@@ -21,21 +21,23 @@ class EmployeeController
         }
         //1
         @GetMapping("/{employeeId}")
-        public EmployeeEntity getEmployeeById(@PathVariable(name = "employeeId") Long id)
+        public EmployeeDTO getEmployeeById(@PathVariable(name = "employeeId") Long id)
         {
 //            return  EmployeeRepository.findById(id);          if it returns null , nullpointerexception can be occure
                return  employeeService.getEmployeeById(id);
         }
+
         //2
         @GetMapping
-        public List<EmployeeEntity> getAllEmployees(@RequestParam(required = false, name = "InputAge") Integer age,
+        public List<EmployeeDTO> getAllEmployees(@RequestParam(required = false, name = "InputAge") Integer age,
                                                             @RequestParam(required = false) String sortBy)
         {
             return employeeService.getAllEmployees();
         }
+
         //3
         @PostMapping
-        public EmployeeEntity addEmployee(@RequestBody EmployeeEntity InputEmployee)
+        public EmployeeDTO addEmployee(@RequestBody EmployeeDTO InputEmployee)
         {
             return  employeeService.addEmployee(InputEmployee);
         }
