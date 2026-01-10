@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employees")
-class EmployeeController
+public class  EmployeeController
     {
         private final EmployeeService employeeService;
 
@@ -42,22 +42,21 @@ class EmployeeController
             return  employeeService.addEmployee(InputEmployee);
         }
 
-        @PutMapping
-        public String updateEmployeeById()
+        //4
+        @PutMapping("/{employeeId}")
+        public EmployeeDTO updateEmployee( @PathVariable("employeeId") Long id, @RequestBody EmployeeDTO inputEmployee)
         {
-            return "Return from PutMapping ";
+            return employeeService.updateEmployeeById(inputEmployee, id);
         }
 
-        @DeleteMapping
-        public String deleteEmployeeById()
-        {
-            return "Return from DeleteMapping";
+        @DeleteMapping("/{employeeId}")
+        public String deleteEmployeeById(@PathVariable Long employeeId) {
+            return "Deleted employee " + employeeId;
         }
 
-        @PatchMapping
-        public String patchEmployeeById()
-        {
-            return "Return from PatchMapping";
+        @PatchMapping("/{employeeId}")
+        public String patchEmployeeById(@PathVariable Long employeeId) {
+            return "Patched employee " + employeeId;
         }
 
     }

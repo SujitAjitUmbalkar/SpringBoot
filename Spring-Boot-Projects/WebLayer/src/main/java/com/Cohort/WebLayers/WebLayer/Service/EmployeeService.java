@@ -24,7 +24,8 @@ public class EmployeeService
     //1     @GetMapping("/{employeeId}")
     public EmployeeDTO getEmployeeById(Long id)
     {
-        EmployeeEntity employeeEntity =   employeeRepository.findById(id).orElse(null);
+        EmployeeEntity employeeEntity =   employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found with id "+ id ));
        return modelmapper.map(employeeEntity, EmployeeDTO.class);       // returning after converting Entity into DTO using map method
     }
 
@@ -43,6 +44,22 @@ public class EmployeeService
         EmployeeEntity savedEntity =  employeeRepository.save(employeeEntity);          // save entity
 
         return modelmapper.map(savedEntity, EmployeeDTO.class);         // return converting entity in Dto to Controller
+    }
 
+    public EmployeeDTO updateEmployeeById(EmployeeDTO inputEmployee, Long id)
+    {
+        EmployeeEntity existingemployeeEntity =employeeRepository.findById(id)      // first find if that Enity is present
+                        .orElseThrow(() -> new RuntimeException("Employee not found")); // if not return exception
+
+        // IMPORTANT: preserve ID
+        inputEmployee.setId(existingemployeeEntity.getId());        // map method will not set id because i didn't sent id from json , passed through browser
+        // therefore modelmapper wont set id of Entity , that's why 500 error occues
+        // inshort , set id manually
+        modelmapper.map(inputEmployee, existingemployeeEntity);     // convert DTO in Existing repo using map mthod
+        // don't use .class because it will create new object
+
+        EmployeeEntity updatedEntity = employeeRepository.save(existingemployeeEntity);     // update existing entity
+
+        return modelmapper.map(updatedEntity, EmployeeDTO.class);
     }
 }
