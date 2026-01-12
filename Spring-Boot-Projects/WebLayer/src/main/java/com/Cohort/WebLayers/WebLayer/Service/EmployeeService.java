@@ -62,4 +62,18 @@ public class EmployeeService
 
         return modelmapper.map(updatedEntity, EmployeeDTO.class);
     }
+
+    public boolean  deleteEmployeeById(Long employeeId)
+    {
+        boolean exists = employeeRepository.existsById(employeeId);
+        if(exists )
+        {
+            employeeRepository.deleteById(employeeId);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
