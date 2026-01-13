@@ -4,9 +4,12 @@ import com.Cohort.WebLayers.WebLayer.Entity.EmployeeEntity;
 import com.Cohort.WebLayers.WebLayer.Repository.EmployeeRepository;
 import com.Cohort.WebLayers.WebLayer.dto.EmployeeDTO;
 import org.modelmapper.ModelMapper;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,17 +66,54 @@ public class EmployeeService
         return modelmapper.map(updatedEntity, EmployeeDTO.class);
     }
 
+    public boolean checkIfEmployeeExists(Long id)
+    {
+        boolean  exists = employeeRepository.existsById(id);
+        if(exists) {    return true;   }
+        else    {   return false;   }
+    }
+
     public boolean  deleteEmployeeById(Long employeeId)
     {
-        boolean exists = employeeRepository.existsById(employeeId);
+        boolean exists = checkIfEmployeeExists(employeeId);
         if(exists )
-        {
-            employeeRepository.deleteById(employeeId);
+        {   employeeRepository.deleteById(employeeId);
             return true;
         }
-        else
-        {
-            return false;
-        }
+        else{   return false;   }
     }
+
+    public EmployeeDTO patchEmployeeById(Long employeeId, Map<String, Object> update)
+    {
+        EmployeeEntity employeeExistingEntity = employeeRepository.findById(employeeId)         // check if employee exists
+                .orElseThrow(() -> new RuntimeException("Employee not found with id " + employeeId));
+
+        update.forEach((field, value) ->
+        {
+//            find the exact field (variable) named field inside the EmployeeEntity class
+//            and returns it as a Field object, throwing an error if that field does not exist.
+
+            Field fieldToBeUpdated = ReflectionUtils.findField(EmployeeEntity.class, field);
+
+            if(fieldToBeUpdated != null)
+            {
+                fieldToBeUpdated.setAccessible(true);
+                ReflectionUtils.setField(fieldToBeUpdated, employeeExistingEntity, value);
+            }
+
+            fieldToBeUpdated.setAccessible(true);
+
+            ReflectionUtils.setField(
+                    fieldToBeUpdated,
+                    employeeExistingEntity,
+                    value
+            );
+        });
+
+        return modelmapper.map(
+                employeeRepository.save(employeeExistingEntity),
+                EmployeeDTO.class
+        );
+    }
+
 }

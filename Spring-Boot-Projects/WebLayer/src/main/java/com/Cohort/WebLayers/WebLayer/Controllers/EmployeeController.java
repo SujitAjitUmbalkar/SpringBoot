@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employees")
@@ -56,8 +57,9 @@ public class  EmployeeController
         }
 
         @PatchMapping("/{employeeId}")
-        public String patchEmployeeById(@PathVariable Long employeeId) {
-            return "Patched employee " + employeeId;
+        public EmployeeDTO patchEmployeeById(  @PathVariable Long employeeId , Map<String , Object> update)
+        {
+            return employeeService.patchEmployeeById(employeeId , update  );
         }
 
     }
