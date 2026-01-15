@@ -65,16 +65,18 @@ public class EmployeeService
         EmployeeEntity existingemployeeEntity =employeeRepository.findById(id)      // first find if that Enity is present
                         .orElseThrow(() -> new RuntimeException("Employee not found")); // if not return exception
 
-        // IMPORTANT: preserve ID
-        inputEmployee.setId(existingemployeeEntity.getId());        // map method will not set id because i didn't sent id from json , passed through browser
-        // therefore modelmapper wont set id of Entity , that's why 500 error occues
-        // inshort , set id manually
+        inputEmployee.setId(existingemployeeEntity.getId());
         modelmapper.map(inputEmployee, existingemployeeEntity);     // convert DTO in Existing repo using map mthod
-        // don't use .class because it will create new object
 
         EmployeeEntity updatedEntity = employeeRepository.save(existingemployeeEntity);     // update existing entity
 
         return modelmapper.map(updatedEntity, EmployeeDTO.class);
+
+        // IMPORTANT: preserve ID
+        // map method will not set id because i didn't sent id from json , passed through browser
+        // therefore modelmapper wont set id of Entity , that's why 500 error occues
+        // inshort , set id manually
+        // don't use .class because it will create new object
     }
 
     public boolean checkIfEmployeeExists(Long id)
@@ -96,35 +98,32 @@ public class EmployeeService
 
     public EmployeeDTO patchEmployeeById(Long employeeId, Map<String, Object> update)
     {
-        EmployeeEntity employeeExistingEntity = employeeRepository.findById(employeeId)         // check if employee exists
+        // 1. Check if employee exists
+        EmployeeEntity employeeExistingEntity = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found with id " + employeeId));
 
-        update.forEach((field, value) ->
+        // 2. Loop through map entries)
+        for (Map.Entry<String, Object> entry : update.entrySet())
         {
-//            find the exact field (variable) named field inside the EmployeeEntity class
-//            and returns it as a Field object, throwing an error if that field does not exist.
+            String field = entry.getKey();
+            Object value = entry.getValue();
 
+            // 3. Find the field in EmployeeEntity class
             Field fieldToBeUpdated = ReflectionUtils.findField(EmployeeEntity.class, field);
 
-            if(fieldToBeUpdated != null)
+            // 4. If field exists, update it
+            if (fieldToBeUpdated != null)
             {
                 fieldToBeUpdated.setAccessible(true);
                 ReflectionUtils.setField(fieldToBeUpdated, employeeExistingEntity, value);
             }
+        }
 
-            fieldToBeUpdated.setAccessible(true);
+        // 5. Save and return DTO
+        EmployeeEntity savedEntity = employeeRepository.save(employeeExistingEntity);
 
-            ReflectionUtils.setField(
-                    fieldToBeUpdated,
-                    employeeExistingEntity,
-                    value
-            );
-        });
-
-        return modelmapper.map(
-                employeeRepository.save(employeeExistingEntity),
-                EmployeeDTO.class
-        );
+        return modelmapper.map(savedEntity, EmployeeDTO.class);
     }
+
 
 }
