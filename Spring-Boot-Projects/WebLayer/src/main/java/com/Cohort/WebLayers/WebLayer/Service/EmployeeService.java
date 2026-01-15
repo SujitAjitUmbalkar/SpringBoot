@@ -8,6 +8,7 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,11 +35,21 @@ public class EmployeeService
 
     // 2        GetMapping
     public List<EmployeeDTO> getAllEmployees() {
-        List<EmployeeEntity> employeeEntities = employeeRepository.findAll();
+//        List<EmployeeEntity> employeeEntities = employeeRepository.findAll();
+//
+//        return employeeEntities.stream()
+//                .map(employeeEntitiy -> modelmapper.map(employeeEntitiy, EmployeeDTO.class))
+//                .collect(Collectors.toList());
 
-        return employeeEntities.stream()
-                .map(employeeEntitiy -> modelmapper.map(employeeEntitiy, EmployeeDTO.class))
-                .collect(Collectors.toList());
+        List<EmployeeEntity> employeeEntities = employeeRepository.findAll();
+        List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+        for (EmployeeEntity employeeEntity : employeeEntities)
+        {
+            EmployeeDTO employeeDTO = modelmapper.map(employeeEntity, EmployeeDTO.class);
+            employeeDTOList.add(employeeDTO);
+        }
+
+        return employeeDTOList;
     }
 
     public EmployeeDTO addEmployee(EmployeeDTO inputEmployee)
