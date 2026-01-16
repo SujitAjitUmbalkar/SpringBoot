@@ -2,6 +2,7 @@ package com.Cohort.WebLayers.WebLayer.Controllers;
 
 import com.Cohort.WebLayers.WebLayer.Service.EmployeeService;
 import com.Cohort.WebLayers.WebLayer.dto.EmployeeDTO;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class  EmployeeController
 
         //3
         @PostMapping
-        public ResponseEntity<EmployeeDTO> addEmployee(@RequestBody EmployeeDTO InputEmployee)
+        public ResponseEntity<EmployeeDTO> addEmployee(@RequestBody @NotNull EmployeeDTO InputEmployee)
         {
             EmployeeDTO savedEmployee = employeeService.addEmployee( InputEmployee);
              return new ResponseEntity<>(savedEmployee , HttpStatus.CREATED);
