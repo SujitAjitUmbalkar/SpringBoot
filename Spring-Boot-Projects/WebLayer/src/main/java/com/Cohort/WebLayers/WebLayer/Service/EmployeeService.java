@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,11 +27,22 @@ public class EmployeeService
     }
 
     //1     @GetMapping("/{employeeId}")
-    public EmployeeDTO getEmployeeById(Long id)
+    public Optional<EmployeeDTO> getEmployeeById(Long id)
     {
-        EmployeeEntity employeeEntity =   employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found with id "+ id ));
-       return modelmapper.map(employeeEntity, EmployeeDTO.class);       // returning after converting Entity into DTO using map method
+        Optional<EmployeeEntity> employeeEntity =   employeeRepository.findById(id);
+        return employeeEntity.map(employeeEntity1 -> modelmapper.map(employeeEntity1, EmployeeDTO.class));
+
+//        return employeeRepository.findById(id).map(employee -> modelmapper.map(employee, EmployeeDTO.class));
+
+        /*
+        STEPS:
+        employeeRepository.findById(id) searches the database and returns an Optional<EmployeeEntity>.
+        Optional may contain an EmployeeEntity or may be empty if not found.
+        map() checks only if a value is present inside the Optional.
+        If present, that value is passed as employeeEntity1 to the lambda expression.
+        modelMapper.map() converts EmployeeEntity into EmployeeDTO and returns it wrapped in Optional.
+         */
+
     }
 
     // 2        GetMapping
@@ -100,17 +112,15 @@ public class EmployeeService
     {
         // 1. Check if employee exists
         EmployeeEntity employeeExistingEntity = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new RuntimeException("Employee not found with id " + employeeId));
+                .orElse(null);
 
         // 2. Loop through map entries)
         for (Map.Entry<String, Object> entry : update.entrySet())
         {
             String field = entry.getKey();
             Object value = entry.getValue();
-
             // 3. Find the field in EmployeeEntity class
             Field fieldToBeUpdated = ReflectionUtils.findField(EmployeeEntity.class, field);
-
             // 4. If field exists, update it
             if (fieldToBeUpdated != null)
             {
@@ -118,12 +128,8 @@ public class EmployeeService
                 ReflectionUtils.setField(fieldToBeUpdated, employeeExistingEntity, value);
             }
         }
-
         // 5. Save and return DTO
         EmployeeEntity savedEntity = employeeRepository.save(employeeExistingEntity);
-
         return modelmapper.map(savedEntity, EmployeeDTO.class);
     }
-
-
 }
