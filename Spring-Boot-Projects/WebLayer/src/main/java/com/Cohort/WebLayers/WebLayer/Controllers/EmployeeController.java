@@ -32,6 +32,12 @@ public class  EmployeeController
                            .orElseThrow(() -> new NoSuchElementException("Employee not found"));
         }
 
+        @ExceptionHandler(NoSuchElementException.class)
+        public ResponseEntity<String> HandleException(NoSuchElementException e)
+        {
+            return new  ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
+        }
+
         //2
         @GetMapping
         public ResponseEntity<List<EmployeeDTO>> getAllEmployees(@RequestParam(required = false, name = "InputAge") Integer age,
