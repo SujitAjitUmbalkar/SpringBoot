@@ -10,8 +10,10 @@ import java.util.NoSuchElementException;
 public class GlobalExceptionHandeller
 {
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<String> HandleResourceNotFound(NoSuchElementException e)
+    public ResponseEntity<ApiError> HandleResourceNotFound(NoSuchElementException e)
     {
-        return new ResponseEntity<>("THere is no such resource ", HttpStatus.NOT_FOUND);
+        ApiError apiError = ApiError.builder().status(HttpStatus.NOT_FOUND).messsage("Resource Not Found").build();
+
+        return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
 }
