@@ -1,6 +1,7 @@
 package com.Cohort.WebLayers.WebLayer.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Version;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,4 +48,7 @@ public class EmployeeDTO
     @AssertTrue(message = "Employee should be active")
     @JsonProperty("isActive")
     private Boolean isActive;
+
+    @Version
+    private Integer version;
 }

@@ -1,6 +1,7 @@
 package com.Cohort.WebLayers.WebLayer.Service;
 
 import com.Cohort.WebLayers.WebLayer.Entity.EmployeeEntity;
+import com.Cohort.WebLayers.WebLayer.Exceptions.NoResourceFoundException;
 import com.Cohort.WebLayers.WebLayer.Repository.EmployeeRepository;
 import com.Cohort.WebLayers.WebLayer.dto.EmployeeDTO;
 import org.modelmapper.ModelMapper;
@@ -63,7 +64,7 @@ public class EmployeeService
 
         return employeeDTOList;
     }
-
+//    @PostMapping
     public EmployeeDTO addEmployee(EmployeeDTO inputEmployee)
     {
         EmployeeEntity employeeEntity = modelmapper.map(inputEmployee, EmployeeEntity.class);           // convert first in Entity before saving
@@ -74,6 +75,8 @@ public class EmployeeService
 
     public EmployeeDTO updateEmployeeById(EmployeeDTO inputEmployee, Long id)
     {
+        if(checkIfEmployeeExists(id) == false) throw new NoResourceFoundException("Employee not found with id "+ id);
+
         EmployeeEntity existingemployeeEntity =employeeRepository.findById(id)      // first find if that Enity is present
                         .orElseThrow(() -> new RuntimeException("Employee not found")); // if not return exception
 
@@ -105,14 +108,14 @@ public class EmployeeService
         {   employeeRepository.deleteById(employeeId);
             return true;
         }
-        else{   return false;   }
+        else{   throw new NoResourceFoundException("Employee not found with id "+ employeeId);   }
     }
 
     public EmployeeDTO patchEmployeeById(Long employeeId, Map<String, Object> update)
     {
         // 1. Check if employee exists
         EmployeeEntity employeeExistingEntity = employeeRepository.findById(employeeId)
-                .orElse(null);
+                .orElseThrow(() -> new NoResourceFoundException("Employee not found with id "+ employeeId));
 
         // 2. Loop through map entries)
         for (Map.Entry<String, Object> entry : update.entrySet())

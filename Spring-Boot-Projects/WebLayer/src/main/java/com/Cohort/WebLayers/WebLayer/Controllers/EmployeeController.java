@@ -3,6 +3,7 @@ package com.Cohort.WebLayers.WebLayer.Controllers;
 import com.Cohort.WebLayers.WebLayer.Exceptions.NoResourceFoundException;
 import com.Cohort.WebLayers.WebLayer.Service.EmployeeService;
 import com.Cohort.WebLayers.WebLayer.dto.EmployeeDTO;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +52,7 @@ public class  EmployeeController
 
         //3
         @PostMapping
-        public ResponseEntity<EmployeeDTO> addEmployee(@RequestBody @NotNull EmployeeDTO InputEmployee)
+        public ResponseEntity<EmployeeDTO> addEmployee(@RequestBody  @Valid EmployeeDTO InputEmployee)
         {
             EmployeeDTO savedEmployee = employeeService.addEmployee( InputEmployee);
              return new ResponseEntity<>(savedEmployee , HttpStatus.CREATED);
@@ -59,7 +60,7 @@ public class  EmployeeController
 
         //4
         @PutMapping("/{employeeId}")
-        public ResponseEntity<EmployeeDTO> updateEmployee( @PathVariable("employeeId") Long id, @RequestBody EmployeeDTO inputEmployee)
+        public ResponseEntity<EmployeeDTO> updateEmployee(  @PathVariable("employeeId") Long id, @RequestBody @Valid EmployeeDTO inputEmployee)
         {
             EmployeeDTO updatedEmployee = employeeService.updateEmployeeById(inputEmployee, id );
             return ResponseEntity.ok(updatedEmployee);
@@ -74,7 +75,7 @@ public class  EmployeeController
         }
 
         @PatchMapping("/{employeeId}")
-        public ResponseEntity<EmployeeDTO>  patchEmployeeById(  @PathVariable Long employeeId , Map<String , Object> update)
+        public ResponseEntity<EmployeeDTO>  patchEmployeeById(  @PathVariable  Long employeeId , Map<String , Object> update)
         {
             EmployeeDTO updatedEmployee = employeeService.patchEmployeeById(employeeId, update);
             if (updatedEmployee == null) {return ResponseEntity.notFound().build();}
