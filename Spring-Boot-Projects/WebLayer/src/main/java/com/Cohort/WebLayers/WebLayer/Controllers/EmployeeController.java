@@ -29,14 +29,14 @@ public class  EmployeeController
            Optional<EmployeeDTO> employeeDTO = employeeService.getEmployeeById(id);
            return
                    employeeDTO.map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1) )
-                           .orElseThrow(() -> new NoSuchElementException("Employee not found"));
+                           .orElseThrow(() -> new NoSuchElementException("Employee not found"));        // GlobalExceptionHandeller will catch it
         }
-
-        @ExceptionHandler(NoSuchElementException.class)
-        public ResponseEntity<String> HandleException(NoSuchElementException e)
-        {
-            return new  ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
-        }
+//
+//        @ExceptionHandler(NoSuchElementException.class)
+//        public ResponseEntity<String> HandleException(NoSuchElementException e)
+//        {
+//            return new  ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
+//        }
 
 
         //2

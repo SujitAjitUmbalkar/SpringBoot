@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 public class GlobalExceptionHandeller
 {
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<String> exceptionHandler(NoSuchElementException e)
+    public ResponseEntity<String> HandleResourceNotFound(NoSuchElementException e)
     {
         return new ResponseEntity<>("THere is no such resource ", HttpStatus.NOT_FOUND);
     }
