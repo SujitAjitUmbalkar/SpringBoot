@@ -1,5 +1,6 @@
 package com.Cohort.WebLayers.WebLayer.Controllers;
 
+import com.Cohort.WebLayers.WebLayer.Exceptions.NoResourceFoundException;
 import com.Cohort.WebLayers.WebLayer.Service.EmployeeService;
 import com.Cohort.WebLayers.WebLayer.dto.EmployeeDTO;
 import jakarta.validation.constraints.NotNull;
@@ -29,7 +30,7 @@ public class  EmployeeController
            Optional<EmployeeDTO> employeeDTO = employeeService.getEmployeeById(id);
            return
                    employeeDTO.map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1) )
-                           .orElseThrow(() -> new NoSuchElementException("Employee not found"));        // GlobalExceptionHandeller will catch it
+                           .orElseThrow(() -> new NoResourceFoundException("Employee not found with id "+ id));        // GlobalExceptionHandeller will catch it
         }
 //
 //        @ExceptionHandler(NoSuchElementException.class)
