@@ -19,4 +19,15 @@ public class GlobalExceptionHandeller
 
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiError> HandleInternalServerError(Exception eobj)
+    {
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .message(eobj.getMessage())
+                .build();
+
+        return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
