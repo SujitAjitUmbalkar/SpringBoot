@@ -34,20 +34,11 @@ public class EmployeeService
         return employeeEntity.map(employeeEntity1 -> modelmapper.map(employeeEntity1, EmployeeDTO.class));
 
 //        return employeeRepository.findById(id).map(employee -> modelmapper.map(employee, EmployeeDTO.class));
-
-        /*
-        STEPS:
-        employeeRepository.findById(id) searches the database and returns an Optional<EmployeeEntity>.
-        Optional may contain an EmployeeEntity or may be empty if not found.
-        map() checks only if a value is present inside the Optional.
-        If present, that value is passed as employeeEntity1 to the lambda expression.
-        modelMapper.map() converts EmployeeEntity into EmployeeDTO and returns it wrapped in Optional.
-         */
-
     }
 
     // 2        GetMapping
-    public List<EmployeeDTO> getAllEmployees() {
+    public List<EmployeeDTO> getAllEmployees()
+    {
 //        List<EmployeeEntity> employeeEntities = employeeRepository.findAll();
 //
 //        return employeeEntities.stream()
@@ -73,12 +64,12 @@ public class EmployeeService
         return modelmapper.map(savedEntity, EmployeeDTO.class);         // return converting entity in Dto to Controller
     }
 
+    // Put
     public EmployeeDTO updateEmployeeById(EmployeeDTO inputEmployee, Long id)
     {
-        if(checkIfEmployeeExists(id) == false) throw new NoResourceFoundException("Employee not found with id "+ id);
+        checkIfEmployeeExists(id);
 
-        EmployeeEntity existingemployeeEntity =employeeRepository.findById(id)      // first find if that Enity is present
-                        .orElseThrow(() -> new RuntimeException("Employee not found")); // if not return exception
+        EmployeeEntity existingemployeeEntity =employeeRepository.findById(id).get();
 
         inputEmployee.setId(existingemployeeEntity.getId());
         modelmapper.map(inputEmployee, existingemployeeEntity);     // convert DTO in Existing repo using map mthod
@@ -94,44 +85,39 @@ public class EmployeeService
         // don't use .class because it will create new object
     }
 
-    public boolean checkIfEmployeeExists(Long id)
+    public void checkIfEmployeeExists(Long id)
     {
         boolean  exists = employeeRepository.existsById(id);
-        if(exists) {    return true;   }
-        else    {   return false;   }
+        if(!exists) {    throw new NoResourceFoundException("Employee not found with id "+ id);  }
     }
 
+// Delete
     public boolean  deleteEmployeeById(Long employeeId)
     {
-        boolean exists = checkIfEmployeeExists(employeeId);
-        if(exists )
-        {   employeeRepository.deleteById(employeeId);
-            return true;
-        }
-        else{   throw new NoResourceFoundException("Employee not found with id "+ employeeId);   }
+         checkIfEmployeeExists(employeeId);
+         employeeRepository.deleteById(employeeId);
+         return true;
+
     }
 
+    //patch
     public EmployeeDTO patchEmployeeById(Long employeeId, Map<String, Object> update)
     {
-        // 1. Check if employee exists
-        EmployeeEntity employeeExistingEntity = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new NoResourceFoundException("Employee not found with id "+ employeeId));
+        checkIfEmployeeExists(employeeId);
 
-        // 2. Loop through map entries)
+        EmployeeEntity employeeExistingEntity = employeeRepository.findById(employeeId).get();      // use get() when you are 100% sure that resource will found otherwise use orElse(null);
+
         for (Map.Entry<String, Object> entry : update.entrySet())
         {
             String field = entry.getKey();
             Object value = entry.getValue();
-            // 3. Find the field in EmployeeEntity class
             Field fieldToBeUpdated = ReflectionUtils.findField(EmployeeEntity.class, field);
-            // 4. If field exists, update it
             if (fieldToBeUpdated != null)
             {
                 fieldToBeUpdated.setAccessible(true);
                 ReflectionUtils.setField(fieldToBeUpdated, employeeExistingEntity, value);
             }
         }
-        // 5. Save and return DTO
         EmployeeEntity savedEntity = employeeRepository.save(employeeExistingEntity);
         return modelmapper.map(savedEntity, EmployeeDTO.class);
     }
