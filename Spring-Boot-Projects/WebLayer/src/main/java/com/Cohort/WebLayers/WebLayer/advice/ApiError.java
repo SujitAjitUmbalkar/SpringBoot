@@ -3,6 +3,7 @@ package com.Cohort.WebLayers.WebLayer.advice;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
+import java.util.List;
 
 @Data           //  in short: @Data = @Getter + @Setter + @ToString + @EqualsAndHashCode + @RequiredArgsConstructor
 @Builder  // @Builder is a Lombok annotation that implements the Builder design pattern,
@@ -11,5 +12,5 @@ public class ApiError
 {
     private HttpStatus status;
     private String message;
-
+    private List<String> subErrors;
 }
