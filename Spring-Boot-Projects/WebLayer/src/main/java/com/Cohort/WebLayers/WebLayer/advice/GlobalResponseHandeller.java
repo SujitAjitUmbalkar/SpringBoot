@@ -26,6 +26,19 @@ public class GlobalResponseHandeller implements ResponseBodyAdvice<Object>
         {
             return body;
         }
-        return new ApiResponse<>(body);
+        return new ApiResponse<>(body);         // either dto or exception is passed to ApiResponse
     }
 }
+
+/*
+ **Notes on `if–else` condition execution in `beforeBodyWrite()`:**
+
+ * The `if` condition executes **only when** Spring passes a `ResponseEntity` object directly to `beforeBodyWrite()`.
+ * This happens mainly for **exception-handler responses**, where Spring treats the `ResponseEntity` as a complete, final response.
+ * When the `if` condition executes, the response is returned **as-is**, and no additional wrapping is done.
+ * The `else` condition executes when Spring passes a **raw response body** (DTO, list, string, etc.) to `beforeBodyWrite()`.
+ * This occurs for **successful controller responses**, even if the controller originally returned `ResponseEntity<DTO>`.
+ * When the `else` condition executes, the response body is wrapped inside `ApiResponse` for consistency.
+ * This logic ensures **error responses are not double-wrapped** and **successful responses always follow a standard format**.
+
+ */
