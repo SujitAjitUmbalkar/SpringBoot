@@ -22,7 +22,7 @@ public class GlobalResponseHandeller implements ResponseBodyAdvice<Object>
     @Override
     public @Nullable Object beforeBodyWrite(@Nullable Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response)
     {
-        if(body instanceof ResponseEntity<?>)
+        if(body instanceof ApiResponse<?>)
         {
             return body;
         }
@@ -33,8 +33,8 @@ public class GlobalResponseHandeller implements ResponseBodyAdvice<Object>
 /*
  **Notes on `if–else` condition execution in `beforeBodyWrite()`:**
 
- * The `if` condition executes **only when** Spring passes a `ResponseEntity` object directly to `beforeBodyWrite()`.
- * This happens mainly for **exception-handler responses**, where Spring treats the `ResponseEntity` as a complete, final response.
+ * The `if` condition executes **only when** Spring passes a `ApiResponse` object directly to `beforeBodyWrite()`. (comm0nly happens in xceptionhandeller )
+ * This happens mainly for **exception-handler responses**, where Spring treats the `ApiResponse` as a complete, final response.
  * When the `if` condition executes, the response is returned **as-is**, and no additional wrapping is done.
  * The `else` condition executes when Spring passes a **raw response body** (DTO, list, string, etc.) to `beforeBodyWrite()`.
  * This occurs for **successful controller responses**, even if the controller originally returned `ResponseEntity<DTO>`.
