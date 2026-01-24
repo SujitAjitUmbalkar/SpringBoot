@@ -1,6 +1,8 @@
 package com.Cohort.WebLayers.WebLayer.advice;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,6 +11,7 @@ import java.time.LocalDateTime;
 @JsonPropertyOrder({ "timeStamp", "data", "error" })
 public class ApiResponse<T>
 {
+    @JsonFormat(pattern = "hh:mm:ss dd - MM - yyyy")
     private LocalDateTime timeStamp;
 
     private T data;
