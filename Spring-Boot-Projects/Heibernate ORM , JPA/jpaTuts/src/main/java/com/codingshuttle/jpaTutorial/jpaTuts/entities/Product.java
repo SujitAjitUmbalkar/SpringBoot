@@ -16,7 +16,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
-
+@Table(                         // “@Table does not define data, it defines rules and performance for existing data.”
+        name = "product_table",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "title_price_unique", columnNames = {"title_x", "price"})
+        },
+        indexes = {
+                @Index(name = "sku_index", columnList = "sku")
+        }
+)
 public class Product
 {
     @Id
