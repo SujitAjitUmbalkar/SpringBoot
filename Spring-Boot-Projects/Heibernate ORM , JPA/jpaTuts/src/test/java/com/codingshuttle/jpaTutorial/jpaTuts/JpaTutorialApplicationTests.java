@@ -19,24 +19,24 @@ class JpaTutorialApplicationTests
 	void contextLoads() {
 	}
 
-//    @Test
-//    void testRepository()
-//    {
-//        ProductEntity productEntity = ProductEntity.builder()
-//                .sku("nestle234")
-//                .title("Nestle Chocolate")
-//                .price(BigDecimal.valueOf(23.45))
-//                .quantity(4)
-//                .build();
-//
-//        ProductEntity savedProductEntity = productRepository.save(productEntity);
-//        System.out.println(savedProductEntity);
-//    }
-//
-//    @Test
-//    void getRepository()
-//    {
-//        List<ProductEntity> productEntityList = productRepository.findByTitle("pepsii");
-//        System.out.println(productEntityList);
-//    }
+    @Test
+    void testRepository()
+    {
+        ProductEntity productEntity = ProductEntity.builder()
+                .sku("nestle234")
+                .title("Nestle Chocolate")
+                .price(BigDecimal.valueOf(23.45))
+                .quantity(4)
+                .build();
+
+        ProductEntity savedProductEntity = productRepository.save(productEntity);
+        System.out.println(savedProductEntity);
+    }
+
+    @Test
+    void getRepository()
+    {
+        List<ProductEntity> productEntityList = productRepository.findByTitle("pepsii");
+        System.out.println(productEntityList);
+    }
 }
