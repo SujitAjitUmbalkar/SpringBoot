@@ -25,3 +25,4 @@ public interface ProductRepository extends JpaRepository<ProductEntity,Long>
 
     Optional<ProductEntity> findByTitleAndPrice(String parleBuiscuits, BigDecimal price);
 }
+
