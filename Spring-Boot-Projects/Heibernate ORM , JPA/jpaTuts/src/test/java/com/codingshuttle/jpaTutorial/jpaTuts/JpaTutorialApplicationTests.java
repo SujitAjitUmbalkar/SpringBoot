@@ -40,8 +40,8 @@ class JpaTutorialApplicationTests
     @Test
     void getRepository()
     {
-        List<ProductEntity> productEntityList = productRepository.findByTitle("pepsii");
-        System.out.println("Finding by Title pepsii " + productEntityList);
+        List<ProductEntity> productEntityList = productRepository.findByOrderByPrice();
+        System.out.println("findBylOrderByPrice" + productEntityList);
 
         List<ProductEntity> entities = productRepository.findByCreatedAtAfter( LocalDateTime.of(2025, 1, 1, 0, 0, 0 ));
         System.out.println("Finding by findByCreatedAtAfter " + entities);
