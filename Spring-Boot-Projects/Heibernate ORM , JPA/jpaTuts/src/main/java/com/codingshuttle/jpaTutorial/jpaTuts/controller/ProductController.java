@@ -26,7 +26,7 @@ public class ProductController
 @GetMapping
     public List<ProductEntity> getAllProducts(
                                 @RequestParam(defaultValue = "Id") String sortby,
-                                @RequestParam(defaultValue = "1") int pageNumber
+                                @RequestParam(defaultValue = "0") int pageNumber
                                                                             )
     {
 //        return  productRepository.findAll(Sort.by(Sort.Direction.DESC,sortby , "price" , "sku"));
