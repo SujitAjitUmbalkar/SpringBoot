@@ -22,8 +22,14 @@ public class ProductController
 @GetMapping
     public   List<ProductEntity> getAllProducts(@RequestParam(defaultValue = "Id") String sortby )
     {
-        return  productRepository.findAll(Sort.by(Sort.Direction.DESC,sortby , "price" , "sku"));
+//        return  productRepository.findAll(Sort.by(Sort.Direction.DESC,sortby , "price" , "sku"));
 
+        return productRepository.findAll(Sort.by
+                (
+                Sort.Order.desc(sortby),
+                Sort.Order.asc("price")
+                )
+        );
     }
 
 }
