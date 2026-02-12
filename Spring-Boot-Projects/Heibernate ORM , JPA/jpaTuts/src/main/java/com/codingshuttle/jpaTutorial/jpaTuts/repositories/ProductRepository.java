@@ -1,6 +1,7 @@
 package com.codingshuttle.jpaTutorial.jpaTuts.repositories;
 
 import com.codingshuttle.jpaTutorial.jpaTuts.entities.ProductEntity;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,16 +14,17 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<ProductEntity,Long>
 {
 
-    List<ProductEntity> findByOrderByPrice();
-    List<ProductEntity> findByCreatedAtAfter(LocalDateTime after);
-    List<ProductEntity> findByQuantityGreaterThanOrPriceLessThan(int quantity,  BigDecimal price);
+    List<ProductEntity> findBy(Sort sort);
 
-    List<ProductEntity> findByTitleLike(String s);
-
-    List<ProductEntity> findByTitleContaining(String choco);
-
-    List<ProductEntity> findByTitleContainingIgnoreCase(String chOco);
-
-    Optional<ProductEntity> findByTitleAndPrice(String parleBuiscuits, BigDecimal price);
+//    List<ProductEntity> findByCreatedAtAfter(LocalDateTime after);
+//    List<ProductEntity> findByQuantityGreaterThanOrPriceLessThan(int quantity,  BigDecimal price);
+//
+//    List<ProductEntity> findByTitleLike(String s);
+//
+//    List<ProductEntity> findByTitleContaining(String choco);
+//
+//    List<ProductEntity> findByTitleContainingIgnoreCase(String chOco);
+//
+//    Optional<ProductEntity> findByTitleAndPrice(String parleBuiscuits, BigDecimal price);
 }
 
