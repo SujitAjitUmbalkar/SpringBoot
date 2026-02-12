@@ -24,22 +24,17 @@ public class ProductController
     private final int PAGE_SIZE = 5;
 
 @GetMapping
-    public List<ProductEntity> getAllProducts(
-                                @RequestParam(defaultValue = "Id") String sortby,
-                                @RequestParam(defaultValue = "0") int pageNumber
+    public Page<ProductEntity> getAllProducts(
+                                                                                    @RequestParam(defaultValue = "") String title,
+                                                                                    @RequestParam(defaultValue = "id") String sortBy,
+                                                                                    @RequestParam(defaultValue = "0") Integer pageNumber
                                                                             )
     {
-//        return  productRepository.findAll(Sort.by(Sort.Direction.DESC,sortby , "price" , "sku"));
-//        return productRepository.findBy(Sort.by
-//                (
-//                Sort.Order.desc(sortby),
-//                Sort.Order.asc("price")
-//                )
-//        );
-        Pageable pageable = PageRequest.of(pageNumber,  PAGE_SIZE, Sort.by(sortby));
-        return productRepository.findAll(pageable).getContent();
-
+        return productRepository.findByTitleContainingIgnoreCase
+            (
+                title,
+                PageRequest.of(pageNumber, PAGE_SIZE, Sort.by(sortBy) )
+        );
     }
-
 
 }

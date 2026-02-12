@@ -26,8 +26,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity,Long>
 //    List<ProductEntity> findByTitleLike(String s);
 //
 //    List<ProductEntity> findByTitleContaining(String choco);
-//
-//    List<ProductEntity> findByTitleContainingIgnoreCase(String chOco);
+
+    Page<ProductEntity> findByTitleContainingIgnoreCase(String title ,  Pageable pageable);
 //
 //    Optional<ProductEntity> findByTitleAndPrice(String parleBuiscuits, BigDecimal price);
 }
