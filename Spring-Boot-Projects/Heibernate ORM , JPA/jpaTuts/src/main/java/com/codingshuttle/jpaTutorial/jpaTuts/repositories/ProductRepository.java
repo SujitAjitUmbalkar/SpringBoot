@@ -1,6 +1,8 @@
 package com.codingshuttle.jpaTutorial.jpaTuts.repositories;
 
 import com.codingshuttle.jpaTutorial.jpaTuts.entities.ProductEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity,Long>
 {
 
     List<ProductEntity> findBy(Sort sort);
+
+    Page<ProductEntity> findAll(Pageable pageable);
 
 //    List<ProductEntity> findByCreatedAtAfter(LocalDateTime after);
 //    List<ProductEntity> findByQuantityGreaterThanOrPriceLessThan(int quantity,  BigDecimal price);
