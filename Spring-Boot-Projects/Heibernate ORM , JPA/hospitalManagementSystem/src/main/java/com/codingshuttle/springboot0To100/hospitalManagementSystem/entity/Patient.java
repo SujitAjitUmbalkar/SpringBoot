@@ -1,9 +1,8 @@
-package com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.type;
+package com.codingshuttle.springboot0To100.hospitalManagementSystem.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.type.BloodGroupType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,6 +21,9 @@ public class Patient
     private Long id;
 
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    private BloodGroupType bloodGroup;
 
     @CreationTimestamp
     private LocalDate birthDate;
