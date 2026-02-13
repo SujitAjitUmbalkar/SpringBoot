@@ -1,6 +1,5 @@
 package com.codingshuttle.springboot0To100.hospitalManagementSystem.entity;
 
-
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.type.BloodGroupType;
 import jakarta.persistence.*;
 import lombok.Getter;
