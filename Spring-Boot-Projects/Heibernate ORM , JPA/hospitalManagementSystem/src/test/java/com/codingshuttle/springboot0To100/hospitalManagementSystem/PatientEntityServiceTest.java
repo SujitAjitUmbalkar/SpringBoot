@@ -1,7 +1,6 @@
 package com.codingshuttle.springboot0To100.hospitalManagementSystem;
 
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.dto.iPatientInfoDTO;
-import com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.PatientEntity;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.repository.PatientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,16 @@ public class PatientEntityServiceTest
     @Test
     public void testPatient()
     {
-         List<PatientEntity> patientEntityList =  patientRepository.findAll();
+//         List<PatientEntity> patientEntityList =  patientRepository.findAll();
 
+        List<iPatientInfoDTO> iPatientInfoDTOList =  patientRepository.getAllPatientsInfo();
 
+        for( iPatientInfoDTO p: iPatientInfoDTOList )
+        {
+            System.out.println(p);
+        }
+
+        System.out.println(iPatientInfoDTOList.size());
     }
 
 }
