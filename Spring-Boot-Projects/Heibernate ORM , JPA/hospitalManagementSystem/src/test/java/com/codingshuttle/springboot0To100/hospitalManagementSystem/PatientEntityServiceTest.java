@@ -1,5 +1,6 @@
 package com.codingshuttle.springboot0To100.hospitalManagementSystem;
 
+import com.codingshuttle.springboot0To100.hospitalManagementSystem.dto.BloodGroupStatsDTO;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.dto.cPatientInfoDTO;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.dto.iPatientInfoDTO;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.repository.PatientRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -20,14 +22,11 @@ public class PatientEntityServiceTest
     @Test
     public void testPatient()
     {
+        List<BloodGroupStatsDTO> bloodGroupStatsDTOList =patientRepository.getBloodGroupStats();
 
-            List<cPatientInfoDTO> cPatientInfoDTOList = patientRepository.getAllPatientsInfoConcrete();
-
-        for( cPatientInfoDTO p: cPatientInfoDTOList )
+        for( var p: bloodGroupStatsDTOList )
         {
-            System.out.println(p);                                                                                          // now we can print like that
-//            System.out.println(p.getId() + " " + p.getName() + " " + p.getEmail());
+            System.out.println(p);
         }
     }
-
 }
