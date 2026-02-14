@@ -4,8 +4,11 @@ import com.codingshuttle.springboot0To100.hospitalManagementSystem.dto.BloodGrou
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.dto.cPatientInfoDTO;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.dto.iPatientInfoDTO;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.PatientEntity;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,4 +26,10 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long>
     @Query("select new com.codingshuttle.springboot0To100.hospitalManagementSystem.dto.BloodGroupStatsDTO(p.bloodGroup, " +
             "COUNT(p)) from PatientEntity p group by p.bloodGroup order by COUNT(p) DESC")
     List<BloodGroupStatsDTO> getBloodGroupStats();
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE PatientEntity p set p.name = :name where p.id = :id")
+    int updatePatientNameWithId(@Param("name") String name, @Param("id") Long id);
+
 }

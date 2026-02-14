@@ -22,11 +22,15 @@ public class PatientEntityServiceTest
     @Test
     public void testPatient()
     {
-        List<BloodGroupStatsDTO> bloodGroupStatsDTOList =patientRepository.getBloodGroupStats();
+//        List<BloodGroupStatsDTO> bloodGroupStatsDTOList =patientRepository.getBloodGroupStats();
+//
+//        for( var p: bloodGroupStatsDTOList )
+//        {
+//            System.out.println(p);
+//        }
 
-        for( var p: bloodGroupStatsDTOList )
-        {
-            System.out.println(p);
-        }
+        int rowsAffected = patientRepository.updatePatientNameWithId("Sujit Umbalkar", 1L);
+        System.out.println(rowsAffected);
+
     }
 }
