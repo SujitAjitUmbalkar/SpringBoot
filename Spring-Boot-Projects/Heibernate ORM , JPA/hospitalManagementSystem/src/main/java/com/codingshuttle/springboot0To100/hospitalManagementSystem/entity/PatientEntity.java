@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @ToString
 @Getter
 @Setter
-public class Patient
+public class PatientEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
