@@ -25,8 +25,10 @@ public class PatientEntityServiceTest
 
         for( iPatientInfoDTO p: iPatientInfoDTOList )
         {
-            System.out.println(p);
+//            System.out.println(p);
+            System.out.println(p.getId() + " " + p.getName() + " " + p.getEmail());
         }
+
 
         System.out.println(iPatientInfoDTOList.size());
     }
