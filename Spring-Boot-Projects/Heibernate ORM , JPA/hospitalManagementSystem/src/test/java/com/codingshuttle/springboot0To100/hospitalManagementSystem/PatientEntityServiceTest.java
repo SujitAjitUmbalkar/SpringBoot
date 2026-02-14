@@ -1,5 +1,6 @@
 package com.codingshuttle.springboot0To100.hospitalManagementSystem;
 
+import com.codingshuttle.springboot0To100.hospitalManagementSystem.dto.cPatientInfoDTO;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.dto.iPatientInfoDTO;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.repository.PatientRepository;
 import org.junit.jupiter.api.Test;
@@ -19,18 +20,14 @@ public class PatientEntityServiceTest
     @Test
     public void testPatient()
     {
-//         List<PatientEntity> patientEntityList =  patientRepository.findAll();
 
-        List<iPatientInfoDTO> iPatientInfoDTOList =  patientRepository.getAllPatientsInfo();
+            List<cPatientInfoDTO> cPatientInfoDTOList = patientRepository.getAllPatientsInfoConcrete();
 
-        for( iPatientInfoDTO p: iPatientInfoDTOList )
+        for( cPatientInfoDTO p: cPatientInfoDTOList )
         {
-//            System.out.println(p);
-            System.out.println(p.getId() + " " + p.getName() + " " + p.getEmail());
+            System.out.println(p);                                                                                          // now we can print like that
+//            System.out.println(p.getId() + " " + p.getName() + " " + p.getEmail());
         }
-
-
-        System.out.println(iPatientInfoDTOList.size());
     }
 
 }
