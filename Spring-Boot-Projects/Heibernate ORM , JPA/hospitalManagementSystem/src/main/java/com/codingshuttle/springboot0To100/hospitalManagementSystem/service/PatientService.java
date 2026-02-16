@@ -18,10 +18,11 @@ public class PatientService
         PatientEntity p1 = patientRepository.findById(1L).orElse(null);
         PatientEntity p2 = patientRepository.findById(1L).orElse(null);         // tryng to find same used 2 times
 
+        p1.setName("Sujit");
+
         System.out.println(p1) ;
         System.out.println(p2);
+
         System.out.println(p1==p2);
-
-
     }
 }
