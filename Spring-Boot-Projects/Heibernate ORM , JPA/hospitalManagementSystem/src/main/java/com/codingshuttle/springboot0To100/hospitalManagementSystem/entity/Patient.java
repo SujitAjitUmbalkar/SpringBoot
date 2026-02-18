@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @ToString
 @Getter
 @Setter
-public class PatientEntity
+public class Patient
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,5 +32,6 @@ public class PatientEntity
     private String gender;
 
     @OneToOne
+    @JoinColumn(name = "patient_insurance", unique = true) // by default it is unique because onetoone mapping
     private Insurance insurance;
 }

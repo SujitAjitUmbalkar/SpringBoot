@@ -1,6 +1,6 @@
 package com.codingshuttle.springboot0To100.hospitalManagementSystem.service;
 
-import com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.PatientEntity;
+import com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.Patient;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.repository.PatientRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +15,8 @@ public class PatientService
     @Transactional
     public  void testPatientTransaction()
     {
-        PatientEntity p1 = patientRepository.findById(1L).orElse(null);
-        PatientEntity p2 = patientRepository.findById(1L).orElse(null);         // tryng to find same used 2 times
+        Patient p1 = patientRepository.findById(1L).orElse(null);
+        Patient p2 = patientRepository.findById(1L).orElse(null);         // tryng to find same used 2 times
 
         p1.setName("Sujit");
 

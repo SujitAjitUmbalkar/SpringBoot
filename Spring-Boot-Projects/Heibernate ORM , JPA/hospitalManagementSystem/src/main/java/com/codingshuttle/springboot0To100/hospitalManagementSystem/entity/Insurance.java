@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,6 +35,6 @@ public class Insurance
     private LocalDateTime createdAt;
 
     @OneToOne(mappedBy = "insurance")
-    private PatientEntity patient;          //  inverse side
+    private Patient patient;          //  inverse side
 
 }
