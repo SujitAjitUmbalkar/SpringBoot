@@ -30,4 +30,7 @@ public class PatientEntity
     private String email;
 
     private String gender;
+
+    @OneToOne
+    private Insurance insurance;
 }
