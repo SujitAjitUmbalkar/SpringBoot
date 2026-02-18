@@ -8,6 +8,8 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @ToString
@@ -34,4 +36,9 @@ public class Patient
     @OneToOne
     @JoinColumn(name = "patient_insurance", unique = true) // by default it is unique because onetoone mapping
     private Insurance insurance;
+
+    @OneToMany(mappedBy = "patient")                // inverse side of relationship (mappeedby
+    private List<Appointment> appointments =  new ArrayList<>();
+
+
 }
