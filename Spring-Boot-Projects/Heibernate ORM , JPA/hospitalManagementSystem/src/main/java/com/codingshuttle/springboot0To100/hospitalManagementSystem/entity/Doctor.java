@@ -30,4 +30,10 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor")         // reverse side
     private Set<Appointment> appointments = new HashSet<>();            // one dr can have many appointments
 
+    @OneToOne(mappedBy = "headDoctor")
+    private Department headedDepartment;
+
+    @ManyToMany(mappedBy = "doctors")
+    private Set<Department> departments = new HashSet<>();
+
 }
