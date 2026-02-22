@@ -1,5 +1,6 @@
 package com.codingshuttle.springboot0To100.hospitalManagementSystem;
 
+import com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.Patient;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.repository.PatientRepository;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.service.PatientService;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test")
-public class PatientEntityServiceTest
+public class PatientTests
 {
     @Autowired
     private PatientRepository patientRepository;
@@ -21,5 +22,11 @@ public class PatientEntityServiceTest
     public void testPatient()
     {
         patientService.testPatientTransaction();
+    }
+
+    @Test
+    public void deletePatientById()
+    {
+           patientService.deletePatientById(1L);
     }
 }

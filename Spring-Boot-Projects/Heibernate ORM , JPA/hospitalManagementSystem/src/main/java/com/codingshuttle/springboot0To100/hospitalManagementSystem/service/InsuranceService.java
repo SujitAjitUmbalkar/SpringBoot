@@ -21,9 +21,11 @@ public class InsuranceService
         Patient patient = patientRepository.findById(patientId).orElseThrow();          // find specific patient
         patient.setInsurance(insurance);        // and insert insurance object in it
 
-//        patientRepository.save(patient);          // we need to save it exteranally if @Transaction wasnt there
-
         return insurance;
     }
 
+    public void save(Insurance insurance)
+    {
+        insuranceRepository.save(insurance);
+    }
 }

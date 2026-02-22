@@ -1,7 +1,7 @@
 package com.codingshuttle.springboot0To100.hospitalManagementSystem.repository;
 
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.Insurance;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface InsuranceRepository extends Repository<Insurance, Long> {
+public interface InsuranceRepository extends JpaRepository<Insurance, Long> {
 }

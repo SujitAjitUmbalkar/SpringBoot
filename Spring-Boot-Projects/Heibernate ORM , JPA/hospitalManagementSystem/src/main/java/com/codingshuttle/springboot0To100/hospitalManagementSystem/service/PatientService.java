@@ -1,5 +1,6 @@
 package com.codingshuttle.springboot0To100.hospitalManagementSystem.service;
 
+import com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.Insurance;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.Patient;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.repository.PatientRepository;
 import jakarta.transaction.Transactional;
@@ -24,5 +25,11 @@ public class PatientService
         System.out.println(p2);
 
         System.out.println(p1==p2);
+    }
+
+    public void deletePatientById(Long patientId)
+    {
+        patientRepository.findById(patientId).orElseThrow();
+        patientRepository.deleteById(patientId);
     }
 }
