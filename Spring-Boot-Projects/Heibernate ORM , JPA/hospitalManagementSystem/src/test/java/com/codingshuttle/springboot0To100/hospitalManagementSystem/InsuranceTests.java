@@ -35,5 +35,7 @@ public class InsuranceTests
                 .build();
 
          var updatedInsurance =  insuranceService.assignInsuranceToPatient(insurance, 1L);
+
+         System.out.println(updatedInsurance);
     }
 }

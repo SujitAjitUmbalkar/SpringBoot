@@ -34,7 +34,7 @@ public class Patient
 
     private String gender;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST , CascadeType.MERGE})
     @JoinColumn(name = "patient_insurance", unique = true) // by default it is unique because onetoone mapping
     private Insurance insurance;
 
