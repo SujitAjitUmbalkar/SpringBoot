@@ -21,11 +21,8 @@ public class InsuranceService
         Patient patient = patientRepository.findById(patientId).orElseThrow();          // find specific patient
         patient.setInsurance(insurance);        // and insert insurance object in it
 
-        return insurance;
-    }
+        insuranceRepository.save(insurance);            // last commit mistake improved
 
-    public void save(Insurance insurance)
-    {
-        insuranceRepository.save(insurance);
+        return insurance;
     }
 }

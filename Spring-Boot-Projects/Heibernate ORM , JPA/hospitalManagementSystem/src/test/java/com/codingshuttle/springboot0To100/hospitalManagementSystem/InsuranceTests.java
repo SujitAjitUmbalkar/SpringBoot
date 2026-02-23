@@ -1,6 +1,7 @@
 package com.codingshuttle.springboot0To100.hospitalManagementSystem;
 
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.entity.Insurance;
+import com.codingshuttle.springboot0To100.hospitalManagementSystem.repository.InsuranceRepository;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.repository.PatientRepository;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.service.InsuranceService;
 import com.codingshuttle.springboot0To100.hospitalManagementSystem.service.PatientService;
@@ -37,6 +38,5 @@ public class InsuranceTests
 
          System.out.println(updatedInsurance);
 
-         patientService.save(updatedInsurance);
     }
 }
