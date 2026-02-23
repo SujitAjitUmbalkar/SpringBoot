@@ -17,19 +17,19 @@ public class AppointmentService
     private final AppointmentRepository appointmentRepository;
     private final PatientRepository patientRepository;
     private final DoctorRepository doctorRepository;
-//
-//    @Transactional
-//    public Appointment createNewAppointment(Appointment appointment ,  Long patientId , Long doctorId)
-//    {
-//        Patient patient = patientRepository.findById(patientId).orElseThrow();
-//        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
-//
-//        appointment.setPatient(patient);
-//        appointment.setDoctor(doctor);
-//
-//        appointmentRepository.save(appointment);
-//
-//        return appointment;
-//    }
+
+    @Transactional
+    public Appointment createNewAppointment(Appointment appointment ,  Long patientId , Long doctorId)
+    {
+        Patient patient = patientRepository.findById(patientId).orElseThrow();
+        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
+
+        appointment.setPatient(patient);
+        appointment.setDoctor(doctor);
+
+        appointmentRepository.save(appointment);
+
+        return appointment;
+    }
 
 }

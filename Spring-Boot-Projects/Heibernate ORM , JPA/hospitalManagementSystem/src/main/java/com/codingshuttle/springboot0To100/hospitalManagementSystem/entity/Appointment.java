@@ -26,12 +26,12 @@ public class Appointment {
     private String reason;
 
     @ManyToOne // owning side has joincolumn
-    @JoinColumn(nullable = false)               // whenever you fill appointment , patient details must be there
+    @JoinColumn(nullable = false)
     @ToString.Exclude
     @JsonIgnore
     private Patient patient;
 
-    @ManyToOne(fetch = FetchType.LAZY)          // many appointments can have one doctor
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     @ToString.Exclude
     @JsonIgnore
