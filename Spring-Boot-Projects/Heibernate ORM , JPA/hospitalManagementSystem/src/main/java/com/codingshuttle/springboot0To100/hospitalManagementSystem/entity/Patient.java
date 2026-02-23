@@ -38,7 +38,7 @@ public class Patient
     @JoinColumn(name = "patient_insurance", unique = true) // by default it is unique because onetoone mapping
     private Insurance insurance;
 
-    @OneToMany(mappedBy = "patient")                // inverse side of relationship (mappeedby
+    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL)                // inverse side of relationship (mappeedby
     private List<Appointment> appointments =  new ArrayList<>();
 
 
