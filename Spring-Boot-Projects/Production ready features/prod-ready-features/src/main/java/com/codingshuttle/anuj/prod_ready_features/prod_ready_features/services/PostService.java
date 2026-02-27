@@ -2,6 +2,7 @@ package com.codingshuttle.anuj.prod_ready_features.prod_ready_features.services;
 
 
 import com.codingshuttle.anuj.prod_ready_features.prod_ready_features.dto.PostDTO;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface PostService
     PostDTO createNewPost(PostDTO inputPost);
 
     PostDTO getPostById(Long postId);
+
+     PostDTO updatePost(PostDTO inputPost, Long postId);
 }
