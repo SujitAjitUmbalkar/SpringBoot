@@ -5,14 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.domain.Auditable;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
+import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name = "posts")
@@ -20,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
+@Audited
 public class PostEnity extends AuditableEntity
 {
     @Id
@@ -28,7 +22,8 @@ public class PostEnity extends AuditableEntity
 
     private String title;
 
-    private String description;
+//    @NotAudited
+    private String description;         // except this field , all fields wil be audited
 
     @PrePersist
     public void beforeSave()
