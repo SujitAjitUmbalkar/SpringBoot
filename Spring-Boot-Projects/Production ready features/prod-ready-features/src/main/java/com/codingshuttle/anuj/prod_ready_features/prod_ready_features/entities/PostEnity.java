@@ -30,6 +30,22 @@ public class PostEnity extends AuditableEntity
 
     private String description;
 
+    @PrePersist
+    public void beforeSave()
+    {
 
+    }
+
+    @PreUpdate
+    public void beforeUpdate()
+    {
+
+    }
+
+    @PreRemove
+    public void beforeDelete()
+    {
+
+    }
 
 }
