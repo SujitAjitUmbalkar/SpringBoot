@@ -1,35 +1,34 @@
 package com.codingshuttle.anuj.prod_ready_features.prod_ready_features.entities;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.domain.Auditable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "posts")
-@AllArgsConstructor
-@NoArgsConstructor
+@MappedSuperclass
 @Getter
 @Setter
-public class PostEnity extends AuditableEntity
+@EntityListeners(AuditingEntityListener.class)
+public class AuditableEntity
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @CreatedDate
+    @Column(updatable = false, nullable = false)
+    private LocalDateTime createdDate;
 
-    private String title;
+    @LastModifiedDate
+    private LocalDateTime updatedDate;
 
-    private String description;
+    @CreatedBy
+    private String createdBy;
 
-
-
+    @LastModifiedBy
+    private String updatedBy;
 }
