@@ -24,3 +24,9 @@ public class ModelMapperConfig
     }
 
 }
+
+/*
+created the AuditorAware bean inside a @Configuration class to have better control over bean naming,
+centralized configuration management, and future flexibility.
+Using @Bean is considered cleaner in production-level applications compared to @Component.
+ */
