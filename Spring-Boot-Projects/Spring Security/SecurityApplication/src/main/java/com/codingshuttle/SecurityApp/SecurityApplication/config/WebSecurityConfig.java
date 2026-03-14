@@ -25,6 +25,7 @@ public class WebSecurityConfig
                          .requestMatchers("/posts").permitAll()
                          .requestMatchers("/posts/**").hasAnyRole("ADMIN")
                          .anyRequest().authenticated())
+                 .csrf(cssrf -> cssrf.disable())
                  .formLogin(Customizer.withDefaults());
          return  httpSecurity.build();
      }
