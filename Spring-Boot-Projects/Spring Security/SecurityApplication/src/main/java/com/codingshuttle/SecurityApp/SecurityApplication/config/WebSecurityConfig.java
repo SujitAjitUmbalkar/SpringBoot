@@ -16,11 +16,11 @@ public class WebSecurityConfig
      {
          httpSecurity
                  .authorizeHttpRequests(auth->auth
-                         .requestMatchers("/posts").permitAll()
+                         .requestMatchers("/posts/**").permitAll()
                          .anyRequest().authenticated())
                  .formLogin(Customizer.withDefaults());
          return  httpSecurity.build();
      }
 }
- // .requestMatchers("/posts").permitAll()
-// this route will be public for all
+ // .requestMatchers("/posts/**").permitAll()
+// this route and all future routes will be public for all
