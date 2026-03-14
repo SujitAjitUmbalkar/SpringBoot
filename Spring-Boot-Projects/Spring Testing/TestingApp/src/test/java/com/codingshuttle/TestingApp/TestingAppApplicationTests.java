@@ -1,9 +1,10 @@
 package com.codingshuttle.TestingApp;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-//@SpringBootTest
+@SpringBootTest
 class TestingAppApplicationTests
 {
 
@@ -12,5 +13,12 @@ class TestingAppApplicationTests
     {
 
 	}
+
+    @Test
+    @DisplayName("DisplayTestNameAsanyTest")
+    void anyTest()
+    {
+
+    }
 
 }
