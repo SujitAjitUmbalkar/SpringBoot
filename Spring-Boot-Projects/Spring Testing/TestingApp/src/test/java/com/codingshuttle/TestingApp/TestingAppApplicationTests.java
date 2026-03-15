@@ -1,6 +1,8 @@
 package com.codingshuttle.TestingApp;
 
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -40,12 +42,16 @@ class TestingAppApplicationTests
 
         int result = addTwoNumbers(a, b);
 
-        Assertions.assertEquals(10, result);         // import from JUnit /api
-        // use assertEquals based on datatypes , there are multiple methods same named , but operate on diff datatypes
+//        Assertions.assertEquals(10, result);         // import from JUnit /api
+
+        Assertions.assertThat(result)
+                .isEqualTo(10)
+                .isCloseTo(9 , Offset.offset(2));
+
+
 
         log.info("test addition is running");
 
-        // if this equals then test would be pass
     }
 
     // lets say this method is not test , written somewhere else , lets check if it works by Assertions
