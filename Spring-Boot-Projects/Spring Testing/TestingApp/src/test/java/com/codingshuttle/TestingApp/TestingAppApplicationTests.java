@@ -55,4 +55,35 @@ class TestingAppApplicationTests
     // lets say this method is not test , written somewhere else , lets check if it works by Assertions
     int addTwoNumbers(int a, int b){return a+b;}
 
+
+    @Test
+    void testDivideTwoNumbers_WhenDenominatorIsZero_ThenArithmaticExcp()
+    {
+        int c = 5;
+        int d = 0;
+
+        Assertions.assertThatThrownBy( () -> divideTwoNumbers(c, d) )
+                .isInstanceOf(ArithmeticException.class);
+
+        log.info("test divide is running");
+
+
+    }
+    double divideTwoNumbers(int a, int b)
+    {
+        try
+        {
+            // return (double) a / b;
+            // This will NOT throw an exception because the operation becomes floating-point division.
+            // In Java, dividing a floating-point number by zero results in Infinity instead of an exception.
+
+            return a / b;
+            // This WILL throw an ArithmeticException if b is 0 because integer division by zero is not allowed in Java.
+        }
+        catch(ArithmeticException e)
+        {
+            log.info("Arithmetic Exception Found " + e.getMessage());
+            throw new ArithmeticException(e.getMessage());
+        }
+    }
 }
