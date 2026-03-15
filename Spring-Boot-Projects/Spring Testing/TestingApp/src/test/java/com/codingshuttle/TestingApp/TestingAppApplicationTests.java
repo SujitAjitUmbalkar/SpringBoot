@@ -32,10 +32,23 @@ class TestingAppApplicationTests
     @Test
     void testTwo() { log.info("test two is running"); }
 
+    @Test
+    void testAddition()
+    {
+        int a = 5 ;
+        int b = 5;
+
+        int result = addTwoNumbers(a, b);
+
+        Assertions.assertEquals(10, result);         // import from JUnit /api
+        // use assertEquals based on datatypes , there are multiple methods same named , but operate on diff datatypes
+
+        log.info("test addition is running");
+
+        // if this equals then test would be pass
+    }
+
+    // lets say this method is not test , written somewhere else , lets check if it works by Assertions
+    int addTwoNumbers(int a, int b){return a+b;}
+
 }
-
-
-// @BeforeEach runs before every test ( beforeeach , 1test , beforeeach 2nd test ... )
-// @AfterEach runs after every test ( AfterEach , 1test , AfterEach 2nd test ... )
-// @BeforeAll runs before all tests ( BeforeAll , test 1 , test2 , test3... ) (method should be static
-// @AfterAll runs after all tests (test1 , test2 , test3 ... AfterAll )
