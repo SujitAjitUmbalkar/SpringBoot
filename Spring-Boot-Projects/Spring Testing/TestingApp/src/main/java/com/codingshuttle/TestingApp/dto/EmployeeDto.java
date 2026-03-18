@@ -46,4 +46,15 @@ We override equals() so that two objects can be compared based on their data.
  4) Implementing equals() allows frameworks like AssertJ or JUnit to compare objects correctly in tests.
 5) It is also useful when storing objects in collections like HashSet or HashMap.
 6. no need when you comapre premitive datatypes
+
+1) We override hashCode() to generate a hash value based on object data.
+2) By default, Java gives different hashCodes for different memory locations.
+3) If two objects have same data but different hashCodes, hash-based collections will treat them as different.
+4) Implementing hashCode() ensures objects work correctly in HashSet and HashMap.
+5) It is used internally to decide the bucket/location where object will be stored.
+6) If equals() returns true, hashCode() must return same value.
+7) hashCode() improves performance by reducing search time in collections.
+8) No need to use directly for primitive comparisons.
+9) it uses data inside dto , and finds hashcode
+
  */
