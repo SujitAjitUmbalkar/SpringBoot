@@ -66,8 +66,6 @@ class TestingAppApplicationTests
                 .isInstanceOf(ArithmeticException.class);
 
         log.info("test divide is running");
-
-
     }
     double divideTwoNumbers(int a, int b)
     {
