@@ -60,8 +60,6 @@ class EmployeeRepositoryTest
 
         // check we fetched right emplyee
         assertThat(employeeList.get(0).getEmail()).isEqualTo(employee.getEmail());
-
-
     }
 
     @Test
@@ -73,8 +71,6 @@ class EmployeeRepositoryTest
 
         assertThat(employeeList).isEmpty();
         assertThat(employeeList).isNotNull();
-
-
 
     }
 }
