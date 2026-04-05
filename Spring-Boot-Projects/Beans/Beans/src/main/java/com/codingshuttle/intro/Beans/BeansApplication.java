@@ -13,12 +13,18 @@ public class BeansApplication implements CommandLineRunner
 	}
 
     @Autowired
-    PaymentService paymentService;
+    PaymentService paymentService1;
+
+    @Autowired
+    PaymentService paymentService2;
 
     @Override
     public void run(String... args) throws Exception
     {
-        paymentService.pay();
+        System.out.println(paymentService1.hashCode()) ;
+        System.out.println(paymentService2.hashCode()) ;
+        paymentService1.pay();
+        paymentService2.pay();
     }
 
 }
