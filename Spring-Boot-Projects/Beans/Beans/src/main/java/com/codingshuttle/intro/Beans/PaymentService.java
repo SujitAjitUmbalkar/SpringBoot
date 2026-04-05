@@ -20,13 +20,15 @@ public class PaymentService
     }
 
     @PostConstruct
-    public void afterInitaaaaa() {
+    public void afterInitaaaa()             // these methods are called automatically when beans is created
+    {
         //post init logic
         System.out.println("Before paying.");
     }
 
     @PreDestroy
-    public void beforeDestroyaaa() {
+    public void beforeDestroyaa()
+    {
         //cleanup logic
         System.out.println("After payment is done");
     }
