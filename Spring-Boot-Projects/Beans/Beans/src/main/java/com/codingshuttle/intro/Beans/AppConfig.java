@@ -8,9 +8,8 @@ import org.springframework.context.annotation.Scope;
 public class AppConfig
 {
     @Bean
-    @Scope("application") // 🔹 Application Scope (WEB ONLY)
-    // One object per ServletContext (entire application)
-    // Similar to singleton but tied to web app lifecycle
+    @Scope("websocket")   // 🔹 WebSocket Scope
+    // One object per WebSocket session
     public PaymentService paymentService()
     {
         // More logic
