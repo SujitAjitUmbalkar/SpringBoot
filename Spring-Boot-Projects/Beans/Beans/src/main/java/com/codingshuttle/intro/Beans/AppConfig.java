@@ -16,5 +16,15 @@ public class AppConfig
         return new PaymentService();
     }
 
-
+//If you are NOT using WebSocket
+//
+// Then simply REMOVE this bean
+//
+//Because:
+//
+//It is only useful in real-time apps
+//Example:
+//Chat apps
+//Live notifications
+//Gaming
 }
