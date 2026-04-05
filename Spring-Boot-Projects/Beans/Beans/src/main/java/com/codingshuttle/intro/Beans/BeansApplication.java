@@ -21,7 +21,4 @@ public class BeansApplication implements CommandLineRunner
         paymentService.pay();
     }
 
-//    Used for triggering initial operations like service calls (paymentService.pay())
-//Ensures execution happens only after all beans are created and dependency injection is complete
-//Application flow: main() → SpringApplication.run() → Spring Context Initialization → Bean Creation & Autowiring → CommandLineRunner.run() execution
 }
