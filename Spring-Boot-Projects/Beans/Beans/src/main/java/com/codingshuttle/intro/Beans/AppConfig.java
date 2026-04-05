@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Scope;
 public class AppConfig
 {
     @Bean
-    @Scope("session")     // 🔹 Session Scope (WEB ONLY)
-    // One object per HTTP session
-    // Same bean used across multiple requests in same session
+    @Scope("application") // 🔹 Application Scope (WEB ONLY)
+    // One object per ServletContext (entire application)
+    // Similar to singleton but tied to web app lifecycle
     public PaymentService paymentService()
     {
         // More logic
